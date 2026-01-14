@@ -11,4 +11,7 @@ ed
  1768270966232: /about?myName=ishaan New Req Received
  1768271016098: /about?myName=ishaan New Req Received
  1768271173534: /about?myName=ishaan New Req Received
+ 1768354895040: GET / New Req Received
+ 1768354908908: GET /signup New Req Received
+ 1768354984501: GET /signup New Req Received
  
