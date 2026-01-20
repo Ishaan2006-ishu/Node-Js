@@ -44,24 +44,24 @@
     
 // });
 
-// myServer.listen(8000,()=>console.log("server started"))
+//myServer.listen(8000,()=>console.log("server started"))
 
-// ====================>>>>>>     With Express           <<<<<<<<<<<<=========================
-// const http=require("http");
-// const express=require("express");
+//====================>>>>>>     With Express           <<<<<<<<<<<<=========================
+const http=require("http");
+const express=require("express");
 
-// const app=express();
+const app=express();
 
-// app.get("/",(req,res)=>{
-//     return res.send("hello from home page");
-// });
-// app.get("/about",(req,res)=>{
-//     return res.send(`hello from the about page0  hey  ${req.query.name}`);
+app.get("/",(req,res)=>{
+    return res.send("hello from home page");
+});
+app.get("/about",(req,res)=>{
+    return res.send(`hello from the about page0  hey  ${req.query.name}`);
 
-// });
-// app.listen(8000,()=>console.log("server started"));
+});
+app.listen(8000,()=>console.log("server started"));
 
 
-// // const myServer=http.createServer(app);
+// const myServer=http.createServer(app);
 
-// // myServer.listen(8000,()=>console.log("server started"));
+// myServer.listen(8000,()=>console.log("server started"));
