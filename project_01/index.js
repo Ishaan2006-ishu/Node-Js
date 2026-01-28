@@ -7,6 +7,12 @@ const app=express();
 app.use(express.urlencoded({extended: false}));
 const PORT=8000;
 
+app.use((req,res,next)=>{
+    fs.appendFile('log.txt',`\n${Date.now()} : ${req.ip} : ${req.path}`,(err,data)=>{
+        next();
+    });
+});
+
 
 //ROUTES
 app.get('/users', (req,res)=>{
@@ -43,10 +49,33 @@ app.post("/api/users", (req, res)=>{
 app.patch("/api/users:id", (req, res)=>{
     //create tood: cedit user id
     return res.json("status:pending");
+
 })
-app.delete("/api/users", (req, res)=>{
+app.delete("/api/users/:id", (req, res)=>{
     //create tood:delete user with thaat id
-    return res.json("status:pending");
+    const id=Number(req.params.id);
+    const user=users.find(user=>{
+        return user.id===id;
+    })
+
+    if(user){
+        // create new array without the deleted user
+    const filteredUsers = users.filter(user => user.id !== id);
+
+    // update original array (because users is const)
+    users.length = 0;                 // clear array
+    users.push(...filteredUsers);     // refill with filtered data
+
+        fs.writeFile("./MOCK_DATA.json",JSON.stringify(users),(err,data)=>{
+        return res.json({status:"success", id:users.length});
+    })
+
+    }
+    else{
+        return res.json({status:"not find"})
+    }
+
+
 })
 
 
