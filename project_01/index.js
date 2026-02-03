@@ -1,114 +1,120 @@
-const express=require("express");
-const mongoose=  require("mongoose");
+//const express=require("express");
+//const{logReqRes}=require("./middlewares");
+//const mongoose=  require("mongoose");
 //const users=require("./MOCK_DATA.json");
-const fs=require("fs");
+//const fs=require("fs");
+//const {connentMongoDb}=require("./connection");
 //console.log(users);
 
-const app=express();
-app.use(express.urlencoded({extended: false}));
-const PORT=8000;
+//const app=express();
+//app.use(express.urlencoded({extended: false}));
+//app.use(logReqRes("log.txt"));
+//const PORT=8000;
+//connentMongoDb("mongodb://127.0.0.1:27017/youtube-app-1")
 
-mongoose.connect('mongodb://127.0.0.1:27017/youtube-app-1')
-.then(()=>console.log("Mongodb connected"))
-.catch((err)=>console.log("Mongo error",err))
+//const userRouter=require("./routes/user");
+
+// mongoose.connect('mongodb://127.0.0.1:27017/youtube-app-1')
+// .then(()=>console.log("Mongodb connected"))
+// .catch((err)=>console.log("Mongo error",err))
 
 
 
 
 // schema
-const userSchema=new mongoose.Schema({
-    firstName: {
-    type:String,
-    required:true,
-    },
-    lastName:{
-        type:String,
-    },
-    email:{
-        type:String,
-        required:true,
-        unique:true,
-    },
-    jobTitle:{
-        type: String,
-    },
-    gender:{
-        type:String,
-    }
+// const userSchema=new mongoose.Schema({
+//     firstName: {
+//     type:String,
+//     required:true,
+//     },
+//     lastName:{
+//         type:String,
+//     },
+//     email:{
+//         type:String,
+//         required:true,
+//         unique:true,
+//     },
+//     jobTitle:{
+//         type: String,
+//     },
+//     gender:{
+//         type:String,
+//     }
 
-})
+// })
 
-const User = mongoose.model("User",userSchema)
+// const User = mongoose.model("User",userSchema)
 
-app.use((req,res,next)=>{
-    fs.appendFile('log.txt',`\n${Date.now()} : ${req.ip} : ${req.path}`,(err,data)=>{
-        next();
-    });
-});
+// app.use((req,res,next)=>{
+//     fs.appendFile('log.txt',`\n${Date.now()} : ${req.ip} : ${req.path}`,(err,data)=>{
+//         next();
+//     });
+// });
 
 
 //ROUTES
-app.get('/users', async (req,res)=>{
-    const allDbUsers=await User.find({});
+// app.get('/users', async (req,res)=>{
+//     const allDbUsers=await User.find({});
 
-    const html =`
-    <ul>
-    ${allDbUsers.map(user=>`<li>${user.firstName}</li>`).join("")}
-    </ul>`;
-    return res.send(html);
+//     const html =`
+//     <ul>
+//     ${allDbUsers.map(user=>`<li>${user.firstName}</li>`).join("")}
+//     </ul>`;
+//     return res.send(html);
 
-})
-app.get('/api/users', async (req,res)=>{
-    const allDbUsers=await User.find({});
+// })
+// app.get('/api/users', async (req,res)=>{
+//     const allDbUsers=await User.find({});
     
-    return res.send(allDbUsers);
+//     return res.send(allDbUsers);
 
 
-});
-app.get("/api/users/:id",(req,res)=>{
+// });
+// app.get("/api/users/:id",(req,res)=>{
     
-    const id=Number(req.params.id);
-    const user = users.find((user)=>user.id === id);
-    res.json(user);
+//     const id=Number(req.params.id);
+//     const user = users.find((user)=>user.id === id);
+//     res.json(user);
 
-})
+// })
 
-app.post("/api/users", async (req, res)=>{
-    //create todo: create new user
+// app.post("/api/users", async (req, res)=>{
+//     //create todo: create new user
 
-    const body=req.body;
-    if(
-        !body||
-        !body.firstName||
-        !body.lastName||
-        !body.email||
-        !body.gender||
-        !body.jobTitle
-    ) {
-        return res.status(400).json({msg:"all fields are req"});
+//     const body=req.body;
+//     if(
+//         !body||
+//         !body.firstName||
+//         !body.lastName||
+//         !body.email||
+//         !body.gender||
+//         !body.jobTitle
+//     ) {
+//         return res.status(400).json({msg:"all fields are req"});
 
-    }
-    const result=await User.create({
-        firstName:body.firstName,
-        lastName:body.lastName,
-        email:body.email,
-        jobTitle:body.jobTitle,
-        gender:body.gender,
+//     }
+//     const result=await User.create({
+//         firstName:body.firstName,
+//         lastName:body.lastName,
+//         email:body.email,
+//         jobTitle:body.jobTitle,
+//         gender:body.gender,
 
 
-    })
-    console.log(result)
-    return res.status(201).json({msg: "success"})
+//     })
+//     console.log(result)
+//     return res.status(201).json({msg: "success"})
     
-})
-app.patch("/api/users:id", (req, res)=>{
-    //create tood: cedit user id
-    return res.json("status:pending");
-    return res.json({satus:"success"})
+// })
+// app.patch("/api/users:id", (req, res)=>{
+//     //create tood: cedit user id
+//     return res.json("status:pending");
+//     return res.json({satus:"success"})
 
-})
-app.delete("/api/users/:id", async (req, res)=>{
-    await User.findIdByIdAndDelete(req.params.id)
+// })
+// app.delete("/api/users/:id", async (req, res)=>{
+//     await User.findIdByIdAndDelete(req.params.id)
     //create tood:delete user with thaat id
     // const id=Number(req.params.id);
     // const user=users.find(user=>{
@@ -133,11 +139,11 @@ app.delete("/api/users/:id", async (req, res)=>{
     // }
 
 
-})
+//})
 
+// app.use("/user",userRouter);
 
-
-app.listen(PORT, ()=>console.log(`Server startd at port ${8000}`));
+// app.listen(PORT, ()=>console.log(`Server startd at port ${8000}`));
 
 // const express = require("express");
 // const app=express();
@@ -165,3 +171,26 @@ app.listen(PORT, ()=>console.log(`Server startd at port ${8000}`));
 
 
 // app.listen(8000)
+
+
+
+
+const express=require("express");
+const{logReqRes}=require("./middlewares");
+
+const fs=require("fs");
+const {connentMongoDb}=require("./connection");
+
+const app=express();
+app.use(express.urlencoded({extended: false}));
+app.use(logReqRes("log.txt"));
+const PORT=8000;
+connentMongoDb("mongodb://127.0.0.1:27017/youtube-app-1").then(()=>{
+    console.log("Mongodb connected!")
+})
+
+const userRouter=require("./routes/user");
+
+app.use("/user",userRouter);
+
+app.listen(PORT, ()=>console.log(`Server startd at port ${8000}`));
