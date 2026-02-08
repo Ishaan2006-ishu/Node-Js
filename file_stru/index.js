@@ -65,7 +65,7 @@ const fs=require("fs");
 
 // })
 
-fs.open("note2.txt","w+",(err,fd)=>{
+fs.open("note2.txt","r+",(err,fd)=>{
     if (err) throw err;
 
     const buf=Buffer.alloc(1024);
@@ -111,3 +111,9 @@ fs.open("note2.txt","w+",(err,fd)=>{
 //     });
 //   });
 // });
+
+//What w+ REALLY DOES (IMPORTANT)
+
+// The moment you open a file with w+, Node.js tells the OS:
+
+// 👉 “DELETE ALL EXISTING CONTENT FIRST”
