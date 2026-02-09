@@ -13,7 +13,7 @@ const {
   createUser,      // function to create a new user
   updateUser,      // function to update an existing user
   deleteUser       // function to delete a user
-} = require("../controllers/userController");
+} = require("../controllers/dbControllers");
 
 // Handle GET request for "/users"
 // When GET /users is called, execute getUsers controller
@@ -22,7 +22,7 @@ router.get("/", getUsers);
 // Handle GET request for "/users/:id"
 // :id is a dynamic route parameter (e.g., /users/5)
 // Calls getUserById controller
-router.get("/:id", getUserById);
+// router.get("/:id", getUserById);
 
 // Handle POST request for "/users"
 // Used to create a new user
@@ -32,7 +32,7 @@ router.post("/", createUser);
 // Handle PATCH request for "/users/:id"
 // Used to partially update a user (e.g., name only)
 // Calls updateUser controller
-router.patch("/:id", updateUser);
+// router.patch("/:id", updateUser);
 
 // Handle DELETE request for "/users/:id"
 // Used to delete a user by id
