@@ -9,11 +9,11 @@ const router = express.Router();
 // These functions contain the actual logic for each route
 const {
   getUsers,        // function to get all users
-  getUserById,     // function to get a single user by id
+       // function to get a single user by id
   createUser,      // function to create a new user
-  updateUser,      // function to update an existing user
+       // function to update an existing user
   deleteUser       // function to delete a user
-} = require("../controllers/dbControllers");
+} = require("../controllers/userControllers");
 
 // Handle GET request for "/users"
 // When GET /users is called, execute getUsers controller
